@@ -334,7 +334,7 @@ export default function EnchantingDateProposalApp() {
         onClick={handleSubmit}
         className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-6 rounded-full transition-all duration-300 transform hover:scale-105 mt-6 mb-6"
       >
-        Enviar resultados
+        tomale cap y mandamela :)
       </Button>
     </motion.div>,
   ];
