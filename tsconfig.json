@@ -22,10 +22,9 @@
         "name": "next"
       }
     ],
+    "baseUrl": ".",  // Asegúrate de que esté apuntando a la raíz del proyecto
     "paths": {
-      "@/*": [
-        "./*"
-      ]
+      "@/*": ["./*"]  // Esto es correcto para el alias de rutas
     }
   },
   "include": [
