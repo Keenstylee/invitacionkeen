@@ -36,12 +36,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       await transporter.sendMail(mailOptions);
       return res.status(200).json({ message: '¡Resultados enviados con éxito!' });
 
-    } catch (error) {
-      // Actualiza el bloque catch para más detalles
-      console.error('Error al enviar el correo:', error);  // Esto imprimirá el error completo en los logs de Netlify
+    } catch (error: Error) {  // Aquí especificamos que el tipo de error es 'Error'
+      console.error('Error al enviar el correo:', error);  // Imprime el error completo en los logs de Netlify
       return res.status(500).json({
         message: 'Hubo un error al enviar los resultados.',
-        error: error.message,  // Esto proporcionará el mensaje detallado del error
+        error: error.message,  // Muestra el mensaje detallado del error
       });
     }
   } else {
