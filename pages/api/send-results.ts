@@ -36,12 +36,19 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       await transporter.sendMail(mailOptions);
       return res.status(200).json({ message: '¡Resultados enviados con éxito!' });
 
-    } catch (error: Error) {  // Aquí especificamos que el tipo de error es 'Error'
-      console.error('Error al enviar el correo:', error);  // Imprime el error completo en los logs de Netlify
-      return res.status(500).json({
-        message: 'Hubo un error al enviar los resultados.',
-        error: error.message,  // Muestra el mensaje detallado del error
-      });
+    } catch (error: unknown) {  // Usamos 'unknown' para el tipo de error
+      // Verificamos si el error es una instancia de 'Error'
+      if (error instanceof Error) {
+        console.error('Error al enviar el correo:', error);
+        return res.status(500).json({
+          message: 'Hubo un error al enviar los resultados.',
+          error: error.message,  // Muestra el mensaje detallado del error
+        });
+      } else {
+        // Si no es un error de tipo Error, lo manejamos aquí
+        console.error('Error desconocido:', error);
+        return res.status(500).json({ message: 'Hubo un error al enviar los resultados.' });
+      }
     }
   } else {
     // Si el método no es POST
